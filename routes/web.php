@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NotasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', HomeController::class);
+
+Route::controller(NotasController::class)->group( function () {
+    Route::get('/notas', 'index');
+    Route::get('/notas/create', 'create');
+    Route::get('/notas/{nota}', 'show');
 });
+
