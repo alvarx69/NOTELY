@@ -10,13 +10,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('main.css')}}">
 </head>
 
 <body>
     {{-- navbar --}}
     <nav class="navbar" style="background-color: #faea81;">
         <div class="container-fluid ">
-            <a class="navbar-brand" href="{{route('home')}}" >
+            <a class="navbar-brand" href="{{ route('home') }}">
                 <img style="width: 10%" class="rounded float-start" src="{{ asset('images/logo.png') }}" alt="logo">
                 <h1 class="h1" style="font-family: 'Bowlby One SC', sans-serif;">NOTELY</h1>
             </a>
@@ -26,10 +28,10 @@
     {{-- nav --}}
     <ul class="nav justify-content-center" style="background-color: #fbed93; margin-bottom: 150px;">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{route('notas.index')}}">NOTAS</a>
+            <a class="nav-link active" aria-current="page" href="{{ route('notas.index') }}">NOTES</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="{{ route('notas.create') }}">ADD NEW</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Link</a>
@@ -41,15 +43,17 @@
 
     @yield('content')
 
+    @if (session('success'))
+    <div class="succcess" style="text-align: center; color: red; font-family: 'Lexend Deca', sans-serif;">
+        <h3>{{session('success')}}</h3>
+    </div>
+    @endif
 
     <div class="card" style="position: fixed; bottom: 0; width: 100%">
-        <div class="card-header">
-            Quote
-        </div>
         <div class="card-body">
             <blockquote class="blockquote mb-0">
-                <p>A well-known quote, contained in a blockquote element.</p>
-                <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite>
+                <p>APP CREATED BY ALVARO.</p>
+                <footer class="blockquote-footer">Derechos reservados @alvarx69
                 </footer>
             </blockquote>
         </div>

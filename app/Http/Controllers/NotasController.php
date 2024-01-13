@@ -10,12 +10,21 @@ class NotasController extends Controller
     public function index()
     {
         $notes = Note::all();
-        return view('notas/index', ['notes' => $notes]);
+        return view('notas.index', ['notes' => $notes]);
     }
 
     public function create()
     {
-        return view('notas/create');
+        return view('notas.create');
+    }
+
+    public function store(Request $request)
+    {
+        $note = new Note;
+        $note->title = $request->title;
+        $note->description = $request->description;
+        $note->save();
+        return redirect('notas/create')->with('success', 'added note!!');
     }
 
     public function show($id)
@@ -27,5 +36,22 @@ class NotasController extends Controller
     {
         $nota = Note::findOrFail($id);
         return view('notas.edit', compact("nota"));
+    }
+    public function editChange(Request $request, $id)
+    {
+        $nota = Note::find($id);
+        if ($nota) {
+            $request->validate([
+                'title' => 'required'
+            ]);
+
+            $nota->update([
+                'title' => $request->input('title'),
+                'description' => $request->input('description')
+            ]);
+            return redirect("notas/$id")->with('success', 'modified!!');
+        } else {
+            return redirect("notas/$id")->with('error', 'error :(');
+        }
     }
 }

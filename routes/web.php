@@ -20,7 +20,9 @@ Route::get('/', HomeController::class)->name('home');
 Route::controller(NotasController::class)->group( function () {
     Route::get('/notas', 'index')->name('notas.index');
     Route::get('/notas/create', 'create')->name('notas.create');
+    Route::post('/notas/store', 'store')->name('notas.store');
     Route::get('/notas/{nota}', 'show')->name('notas.show');
     Route::get('/notas/edit/{nota}', 'edit')->name('notas.edit');
+    Route::post('/notas/edit/{nota}', 'editChange')->name('notas.edit');
 });
 
