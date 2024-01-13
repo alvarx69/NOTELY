@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Note;
 use Illuminate\Http\Request;
 
 class NotasController extends Controller
 {
     public function index()
     {
-        return view('notas/index');
+        $notes = Note::all();
+        return view('notas/index', ['notes' => $notes]);
     }
 
     public function create()
@@ -16,8 +18,14 @@ class NotasController extends Controller
         return view('notas/create');
     }
 
-    public function show($nota)
+    public function show($id)
     {
-        return view('notas/show', ['nota' => $nota]);
+        $nota = Note::findOrFail($id);
+        return view('notas.show', compact("nota"));
+    }
+    public function edit($id)
+    {
+        $nota = Note::findOrFail($id);
+        return view('notas.edit', compact("nota"));
     }
 }
