@@ -32,6 +32,12 @@ class NotasController extends Controller
         $nota = Note::findOrFail($id);
         return view('notas.show', compact("nota"));
     }
+    public function showPag()
+    {
+        $note = Note::simplePaginate(1);
+        return view('notas.showPag', ['note' => $note]);
+    }
+
     public function edit($id)
     {
         $nota = Note::findOrFail($id);
@@ -54,4 +60,17 @@ class NotasController extends Controller
             return redirect("notas/$id")->with('error', 'error :(');
         }
     }
+
+    public function delete($id)
+    {
+        $note = Note::find($id);
+        if($note) {
+            $note->delete();
+            return redirect("notas")->with('success', 'delete!!');
+        }else{
+            return redirect("notas/$id")->with('error', 'error :(');
+        }
+    }
+
+    
 }

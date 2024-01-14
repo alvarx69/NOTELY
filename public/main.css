@@ -11,3 +11,8 @@ input[type='submit']:hover{
     color: rgb(58, 58, 255);
     
 }
+nav.flex.justify-between{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}

@@ -22,7 +22,7 @@
         </tr>
         <tr>
             <td colspan="2"><h5><a href="{{route('notas.edit', $nota->id)}}">EDIT</a></h5></td>
-            <td colspan="2"><h5><a href="">DELETE</a></h5></td>
+            <td colspan="2"><h5><a href="{{route('notas.delete', $nota->id)}}">DELETE</a></h5></td>
         </tr>
         
     </table>

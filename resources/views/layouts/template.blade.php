@@ -34,18 +34,23 @@
             <a class="nav-link" href="{{ route('notas.create') }}">ADD NEW</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="{{ route('notas.showPag') }}">LISTAR</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
+        
     </ul>
 
     @yield('content')
 
+    {{-- Confirmacion --}}
     @if (session('success'))
     <div class="succcess" style="text-align: center; color: red; font-family: 'Lexend Deca', sans-serif;">
         <h3>{{session('success')}}</h3>
+    </div>
+    @endif
+
+    @if (session('error'))
+    <div class="succcess" style="text-align: center; color: red; font-family: Arial, Helvetica, sans-serif;">
+        <h3>{{session('error')}}</h3>
     </div>
     @endif
 
