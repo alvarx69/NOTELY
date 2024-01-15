@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <form method="POST" action="/laravel/blog/blog/public/notas/store">
+    <form method="POST" action="{{ route('notas.store') }}">
         <table class="table" style="text-align: center">
             <tr>
                 <th>TITLE</th>

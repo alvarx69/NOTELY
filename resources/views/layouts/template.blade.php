@@ -18,7 +18,7 @@
     {{-- navbar --}}
     <nav class="navbar" style="background-color: #faea81;">
         <div class="container-fluid ">
-            <a class="navbar-brand" href="{{ route('home') }}">
+            <a class="navbar-brand" href="">
                 <img style="width: 10%" class="rounded float-start" src="{{ asset('images/logo.png') }}" alt="logo">
                 <h1 class="h1" style="font-family: 'Bowlby One SC', sans-serif;">NOTELY</h1>
             </a>
@@ -35,6 +35,22 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('notas.showPag') }}">LISTAR</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('profile.edit') }}">PERFIL</a>
+        </li>
+        <li class="nav-item">
+            
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+
+                <a class="nav-link" :href="route('logout')"
+                        onclick="event.preventDefault();
+                                    this.closest('form').submit();">
+                    {{ __('LOG OUT') }}
+            </a>
+            </form>
+            
         </li>
         
     </ul>

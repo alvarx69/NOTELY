@@ -3,13 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Note;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NotasController extends Controller
 {
     public function index()
     {
-        $notes = Note::all();
+        $user = User::find(Auth::id());
+        if($user){
+            $notes = $user->notes;
+        }
         return view('notas.index', ['notes' => $notes]);
     }
 
@@ -20,21 +25,25 @@ class NotasController extends Controller
 
     public function store(Request $request)
     {
-        $note = new Note;
-        $note->title = $request->title;
-        $note->description = $request->description;
-        $note->save();
-        return redirect('notas/create')->with('success', 'added note!!');
+        $user = User::find(Auth::id());
+        if ($user) {
+            $note = new Note;
+            $note->title = $request->title;
+            $note->description = $request->description;
+            $user->notes()->save($note);
+        }
+
+        return redirect()->route('notas.show', $note->id)->with('success', 'added note!!');
     }
 
-    public function show($id)
+    public function show($nota)
     {
-        $nota = Note::findOrFail($id);
+        $nota = Note::where('id', $nota)->where('user_id', auth()->id())->firstOrFail();
         return view('notas.show', compact("nota"));
     }
     public function showPag()
     {
-        $note = Note::simplePaginate(1);
+        $note = Note::where('user_id', auth()->id())->simplePaginate(1);
         return view('notas.showPag', ['note' => $note]);
     }
 
@@ -64,13 +73,11 @@ class NotasController extends Controller
     public function delete($id)
     {
         $note = Note::find($id);
-        if($note) {
+        if ($note) {
             $note->delete();
             return redirect("notas")->with('success', 'delete!!');
-        }else{
+        } else {
             return redirect("notas/$id")->with('error', 'error :(');
         }
     }
-
-    
 }

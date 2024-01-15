@@ -4,7 +4,7 @@
 
 @section('content')
     <h2 style="text-align: center; margin-bottom: 40px">EDITING</h2>
-    <form action="/laravel/blog/blog/public/notas/edit/{{$nota->id}}" method="POST">
+    <form action="{{route('notas.editChange', $nota)}}" method="POST">
         <table class="table" style="text-align: center">
             <tr>
                 <th colspan="1">TITLE</th>
