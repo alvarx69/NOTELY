@@ -12,7 +12,7 @@ class NotasController extends Controller
     public function index()
     {
         $user = User::find(Auth::id());
-        if($user){
+        if ($user) {
             $notes = $user->notes;
         }
         return view('notas.index', ['notes' => $notes]);
@@ -28,12 +28,15 @@ class NotasController extends Controller
         $user = User::find(Auth::id());
         if ($user) {
             $note = new Note;
-            $note->title = $request->title;
-            $note->description = $request->description;
-            $user->notes()->save($note);
+            if ($request->title && $request->description) {
+                $note->title = $request->title;
+                $note->description = $request->description;
+                $user->notes()->save($note);
+                return redirect()->route('notas.show', $note->id)->with('success', 'added note!!');
+            }else{
+                return redirect()->route('notas.create')->with('error', 'Both fields required');
+            }
         }
-
-        return redirect()->route('notas.show', $note->id)->with('success', 'added note!!');
     }
 
     public function show($nota)
@@ -75,7 +78,7 @@ class NotasController extends Controller
         $note = Note::find($id);
         if ($note) {
             $note->delete();
-            return redirect("notas")->with('success', 'delete!!');
+            return redirect("notas")->with('success', 'deleted!!');
         } else {
             return redirect("notas/$id")->with('error', 'error :(');
         }
