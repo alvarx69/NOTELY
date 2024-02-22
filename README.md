@@ -8,4 +8,5 @@ El sistema gestor de bases de datos es MySql.
 El front-End esta desarrollado con el sistema de vistas de laravel y bootsrap.
 
 
+## FOTO DE LA APP
 <img src="NotelyApp.png" alt="Imagen">
